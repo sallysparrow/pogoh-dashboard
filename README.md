@@ -15,4 +15,5 @@ The dashboard helps POGOH operations managers and dispatchers monitor bike-share
 | **Station Detail View**| • Show KPI “Bikes available now”<br>• Show line chart of bikes today (00:00 → now)<br>• Highlight KPI with same colour rule |
 | **Comments / Feedback**| • Post comment about a station<br>• List comments chronologically |
 | **Performance & DevOps**| • WebSocket push to React when new snapshot arrives<br>• Docker compose for local dev<br>• Unit tests ≥ 70% coverage |
-
+## 3. Demo
+https://github.com/user-attachments/assets/c5d6d159-cac9-425e-b530-2879aa027a83
