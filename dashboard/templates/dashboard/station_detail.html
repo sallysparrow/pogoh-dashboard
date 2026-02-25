@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>POGOH - {{ station.name }}</title>
+  <link rel="stylesheet" href="{% static 'dashboard/styles.css' %}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="{% static 'dashboard/app.js' %}"></script>
+  <script src="{% static 'dashboard/stationDetail.js' %}"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">POGOH</div>
+  <div class="title">Station Dashboard</div>
+  <div class="user">
+    {{ request.user.username }}
+    <a href="{% url 'logout' %}">Logout</a>
+  </div>
+</header>
+
+<main class="container">
+  <a href="{% url 'dashboard_overview' %}" class="muted">&larr; Back to overview</a>
+
+  <section class="panel" id="stationDetailRoot" data-station-id="{{ station.id }}">
+    <h2 class="panel-title highlight">Station Details</h2>
+
+    <div id="message" class="sub-title">Connecting to WebSocket</div>
+    <span id="error" class="error"></span>
+
+    <div class="details-grid">
+      <div class="card">
+        <div class="meta">
+          <div class="meta-row">
+            <span class="k">Name</span>
+            <span class="v" id="stationName">{{ station.name }}</span>
+          </div>
+          <div class="meta-row">
+            <span class="k">Bikes available</span>
+            <span class="v" id="bikeCount">—</span>
+          </div>
+          <div class="meta-row">
+            <span class="k">% full</span>
+            <span class="v" id="pctFull">—</span>
+          </div>
+          <div class="meta-row">
+            <span class="k">Total slots</span>
+            <span class="v" id="slots">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="subhead">Comments</h3>
+        <ul id="commentList{{ station.id }}" class="comments"></ul>
+        <form id="commentForm" class="comment-form">
+          {% csrf_token %}
+          <input id="commentInput" type="text" placeholder="Add a comment…" />
+          <button id="add-button" type="button" class="btn" onclick="addComment()">Comment</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <canvas id="trendChart" height="120"></canvas>
+    </div>
+  </section>
+</main>
+
+<script>
+  console.log("sanity check")
+  const myUserName = "{{ user.username }}"
+  window.onload = connectToServer
+</script>
+</body>
+</html>

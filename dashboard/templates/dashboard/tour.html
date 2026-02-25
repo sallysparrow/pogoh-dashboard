@@ -1,0 +1,37 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>POGOH - {{ station.name }}</title>
+  <link rel="stylesheet" href="{% static 'dashboard/styles.css' %}" />
+  <script src="{% static 'dashboard/tour.js' %}"></script>"
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">POGOH</div>
+  <div class="title">Station Dashboard</div>
+  <div class="user">
+    {{ request.user.username }}
+    <a href="{% url 'logout' %}">Logout</a>
+  </div>
+</header>
+
+<main class="container">
+  <a href="{% url 'dashboard_overview' %}" class="muted">&larr; Back to overview</a>
+
+  <section class="panel">
+    <h2 class="panel-title highlight">Tours</h2>
+
+    <div id="message" class="sub-title">Connecting to WebSocket</div>
+    <span id="error" class="error"></span>
+
+  </section>
+</main>
+
+<script>
+  const myUserName = "{{ user.username }}"
+  window.onload = connectToServer
+</script>
+</body>
+</html>

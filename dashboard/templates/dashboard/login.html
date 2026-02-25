@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>POGOH - Login</title>
+  <link rel="stylesheet" href="{% static 'dashboard/styles.css' %}">
+</head>
+<body class="auth-bg">
+  <main class="auth-card">
+    <h1 class="logo">POGOH</h1>
+    <form method="post" class="auth-form card">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <label>Username
+        {{ form.username }}
+      </label>
+      <label>Password
+        {{ form.password }}
+      </label>
+      <button type="submit" class="btn">Login</button>
+      <p class="muted">Don't have an account?
+        <a href="{% url 'register' %}">Create one</a>.
+      </p>
+    </form>
+  </main>
+</body>
+</html>
